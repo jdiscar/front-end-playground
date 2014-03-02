@@ -1,4 +1,4 @@
-Ukulele Adventure Time
+Ukulele Chords
 ===
 This is a client side webapp that acts as a songbook for the cartoon Adventure Time. It can easily be adapted to display lyrics and chords for other songs by simply changing the data.js file. It was purely made for fun. The Code Practices here aren't very good: the markup has many unnecessary attributes and the javascript objects are all in the global space. But this is acceptable for a throwaway weekend project.
 
