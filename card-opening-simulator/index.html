@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Ayakashi Cards</title>
+	<!-- This page doesn't really work unless used with the full view -->
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+	<link href="css/ext/bootstrap.min.css" rel="stylesheet">
+	<link href="js/ext/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/bootstrap-dropdown-checkbox.css" rel="stylesheet" type="text/css" >
+	<link href="css/main.css" rel="stylesheet">
+</head>
+
+<body class="custombg-stretch">
+
+	<!-- Modal -->
+	<div id="cardDetailsModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true">
+		<div class="modal-header brand">
+			<a href="#" class="close" data-dismiss="modal">&times;</a>
+			<h3 class="modal-title"></h3>
+		</div>
+		<div class="modal-body"></div>
+	</div>
+	
+	<!-- Navbar -->
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="brand" style="color: #887DB8" href="index.html">Ayakashi</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav navbar-left">
+						<li><a id="aboutLink" href="description.html">About</a></li>
+						<li><a id="cardsLink" href="index.html">Cards</a></li>
+						<li><a id="collectionLink" href="index.html?collection=true">Collection</a></li>
+						<li class="viewlist"></li>
+						<li class="sortlist"></li>
+						<li class="wallpaperlist"></li>
+					</ul>
+					<ul class="nav pull-right">
+						<a class="btn btn-small btn-custom" href="openPack.html" style="margin-top:7px">Open Pack</a>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- div for wallpaper preview -->
+	<div class="wallpaperPreview custombg-fit hide"></div>
+
+	<!-- Body -->
+	<div class="container content">
+		<div class="row-fluid" style="margin-top:40px">
+			<div class="span12"><div class="cards" /></div>
+		</div>
+		<div class="row" >
+			<div class="span12"><center><i class="fa fa-3x fa-spinner fa-spin"></i></center></div>
+		</div>
+	</div>
+
+	<!-- Template Definitions -->
+	<script id="card-template" type="text/x-handlebars-template">
+	  <div class="card">
+			<div onclick="showDialog({{i}})" class="card-image clickable">
+				<div class="statusBox {{#unless views.list-statusbox}}hide{{/unless}}">
+					<span class="attack"><b>Atk:</b> {{attack}}</span>
+					<span class="defense"><b>Def:</b> {{defense}}</span>
+				</div>
+				<img src="img/card-thumbs/{{imagePath}}" />
+			</div>
+			<div class="likeBox {{#unless views.list-likebox}}hide{{/unless}}">
+				<span class="no-selection" onclick="likeCard({{i}},1)"><i class="fa fa-flip-horizontal fa-1x fa-thumbs-o-up clickable" /></span>
+				<span class="no-selection" id="like-{{i}}" class="likeCount">{{likes}}</span>
+				<span class="no-selection" onclick="likeCard({{i}},-1)"><i class="fa fa-1x fa-thumbs-o-down clickable" /></span>
+			</div>
+			<div class="list-infoBox {{#unless views.list-infobox}}hide{{/unless}}">
+				<div class="name brand {{#unless views.name}}hide{{/unless}}">{{name}}</div>
+				<div class="caption {{#unless views.caption}}hide{{/unless}}">"{{caption}}"</div>
+				<div class="lore {{#unless views.lore}}hide{{/unless}}">{{tlore}}</div>
+			</div>
+		</div>
+	</script>
+	
+	<script id="placeholder-template" type="text/x-handlebars-template">
+		{{#if views.placeholders}}
+		<div class="card placeholder hide">
+			<div class="card-image">
+				<div class="statusBox {{#unless views.list-statusbox}}hide{{/unless}}">
+					<span class="attack"><b>Atk:</b> ???</span>
+					<span class="defense"><b>Def:</b> ???</span>
+				</div>
+				<img class="placeholder-image" src="img/placeholder.png" />
+			</div>
+			<div class="likeBox {{#unless views.list-likebox}}hide{{/unless}}">
+				<span class="no-selection"><i class="fa fa-flip-horizontal fa-1x fa-thumbs-o-up" /></span>
+				<span class="no-selection" id="like-{{i}}" class="likeCount"></span>
+				<span class="no-selection"><i class="fa fa-1x fa-thumbs-o-down" /></span>
+			</div>
+			<div class="list-infoBox {{#unless views.list-infobox}}hide{{/unless}}">
+				{{#if views.name}}<div class="name brand">???</div>{{/if}}
+				{{#if views.caption}}<div class="caption">"???"</div>{{/if}}
+				{{#if views.lore}}<div class="lore">???</div>{{/if}}
+			</div>
+		</div>
+		{{/if}}
+	</script>
+	
+	<script id="card-detail-template" type="text/x-handlebars-template">
+		<img class="detail-image" src="img/cards/{{imagePath}}">
+		<div class="detail-infobox {{#unless views.detail-infobox}}hide{{/unless}}">
+			<p><h3>{{rawname}}</h3></p>
+			<p><h4>{{form}}</h4></p>
+			<p><b>Rarity</b>: {{rarity}}</p>
+			<p><b>Attack</b>: {{attack}}</p>		
+			<p><b>Defense</b>: {{defense}}</p>
+			<p><b>Type</b>: {{type}}</p>
+			<p><b>Spirit</b>: {{spirit}}</p>		
+			<p style="color: green">"{{caption}}"</p>
+			<p>{{lore}}</p>		
+			<p class="detail-infobox-nav {{#if views.placeholders}}hide{{/if}}">
+				<span style="float:left"><a class="clickable" onclick="showDialog({{previ}})">< Prev</a></span>	
+				<span style="float:right"><a class="clickable" onclick="showDialog({{nexti}})">Next ></a></span>
+				<!-- <span><a class="clickable" onclick="toggleView(false,true,{name:'detail-infobox'});showDialog({{i}})">Hide Info Box</a></span> -->		
+			</p>
+		</div>
+	</script>
+
+	<!-- Javascript -->
+	<script src="js/ext/jquery-2.1.0.min.js"></script>
+	<script src="js/ext/bootstrap.min.js"></script>
+	<script src="js/ext/handlebars-v1.3.0.js"></script>
+	<script src="js/bootstrap-dropdown-checkbox.js"></script>
+	<script src="sample-data.js"></script>
+	<script src="js/ayacommon.js"></script>
+	<script src="js/index.js"></script>
+
+</body>
+</html>

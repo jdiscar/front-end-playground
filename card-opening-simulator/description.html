@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Ayakashi Cards - About</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="css/ext/bootstrap.min.css" rel="stylesheet">
+	<link href="js/ext/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/bootstrap-dropdown-checkbox.css" rel="stylesheet" type="text/css" >
+	<link href="css/main.css" rel="stylesheet">
+</head>
+
+<body class="custombg-stretch">
+
+	<!-- Navbar -->
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="brand" style="color: #887DB8" href="index.html">Ayakashi</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav navbar-left">
+						<li><a id="aboutLink" href="description.html">About</a></li>
+						<li><a id="cardsLink" href="index.html">Cards</a></li>
+						<li><a id="collectionLink" href="index.html?collection=true">Collection</a></li>
+						<li class="viewlist"></li>
+						<li class="sortlist"></li>
+						<li class="wallpaperlist"></li>
+					</ul>
+					<ul class="nav pull-right">
+						<a class="btn btn-small btn-custom" href="openPack.html" style="margin-top:7px">Open Pack</a>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- div for wallpaper preview -->
+	<div class="wallpaperPreview custombg-fit hide"></div>
+
+	<!-- Body -->
+	<div class="container content">
+		<div class="row-fluid text"  style="margin-top:40px">
+			<div class="span12 textbox">
+				<p>
+					<h2>About This Site:</h2>
+				</p><p>
+					This site is a "Card Pack Opening Simulator and Gallery." Open cards by clicking the <a href="openPack.html">"Open Pack"</a> button, view your <a href="index.html?collection=true">"Collection"</a> by clicking on <a href="index.html?collection=true">"Collection"</a>. Cheat and view all the cards by clicking <a href="index.html?collection=true">"Cards."</a> Click a card to zoom in on it. You can download this site and use it offline to see all the cards.
+				</p><p>
+					Mobile TCGs are pretty popular, especially in Asia. I was introduced to the genre through Cygame's very popular "Rage of Bahamut." I peeked at a few others, but they're all basically the same. The gameplay is... actually, nonexistent. You acquire cards by clicking buttons a few times every hour (or by paying money to open packs of cards.) You then choose some number of cards to fight other players... but the fighting is a one shot calculation of who's cards have better stats. You improve your cards stats by clicking more buttons (or by paying more money.)
+				</p><p>
+					Despite that, the games bring in a lot of money. The social aspect helps, but I think that most of the draw is the presentation and the addicting nature of collecting cards. I checked out "Ayakashi: Ghost Guild" because one of my friends was working for Zynga when it came out. Out of all the TCGs I've seen, I liked the presentation of Ayakashi the best. The cliched story has nostalgic charm, the music is relaxing, and the artwork really appeals to me. Of course, the gameplay still didn't appeal to me, so I barely played the game. But I liked the cards.
+				</p><p>
+					Fast forward to last weekend where I wanted to learn CSS correctly. I needed to decide on a project, so I decided to make a quick "Card Pack Opening Simulator and Gallery." Because I liked Ayakashi, I went with that game. The result came out very nice. There are no ads on this site, but maybe you can show your appreciation by throwing some money at Ayakashi. If nothing else, they employ hard working designers.
+				</p><p>
+					This site was designed for learning about the front end, so it's HTML/JS/CSS only. This means you can download the site (HERE) and use it offline (except in Internet Explorer). I limited the online version to 80 cards (mostly to save my bandwidth), but the offline version has about 1,000 cards for you to unlock.
+				</p><p>
+					If you have questions or comments, contact me at: 
+				</p>
+			</div>
+		</div>
+		<div class="row-fluid text">
+			<div class="span12 textbox">				
+				<p>
+					<h2>The technology that drives this site:</h2>
+				</p><p>
+					First off, all the images and data were collected from <a href="http://ayakashi-ghost-guild.wikia.com/wiki/AGGWiki">http://ayakashi-ghost-guild.wikia.com/wiki/AGGWiki</a>.  Due to the site organization, it was not easy to collect.
+				</p><p>
+					This site is purely Javascript, HTML, and CSS. It can be run entirely from an offline local file system. I made it to try to keep my front end knowledge from getting to rusty. I was supposed to just focus on CSS3, but eventually gave in to feature creep. The only real downsides to making this app entirely client side were that I couldn't organize the code as well (the different pages have copy/pasted code and making a one page app would require a lot more javascript) and I couldn't optimize serving images. There are a few optimizations and a lot of code reorganization that could be done, but the site is good enough for now.  As for the technologies...
+				</p><p>
+					I used JQuery 2.1.0. I like JQuery.
+				</p><p>
+					I used Handlebars 1.3.0 for templating. I really like handlebars. It's not too flexible and it's not too rigid.
+				</p><p>
+					I used Font Awesome for icons. Font Awesome is awesome.
+				</p><p>
+					Bootstrap 2.3.2 provides a lot of the styling behind this site. The more I use and understand Bootstrap, the less I like it. In the beginning, it made it easy to make a pretty site. But if you move away from the default and basic examples, it gets really hard to make a site look the way that you want. Although the LESS styles are decently commented, that documentation doesn't carry over to the rest of the code base. The javascript code and plugins I've seen are very sparsely commented. Just figuring out how to use a particular module generally requires me to delve deep into the code, which is a pain with the lack of comments. At that point, it might be easier to just make my own implementation. I don't care too much for the Bootstrap coding style, so I'd normally want to stay out of its codebase unless I needed to extend functionality. It takes a long time to really understand how to customize Bootstrap, the real trick is that you have to use LESS and you have to read the code. Even the "customize" page is of limited use because the options aren't documented.
+				</p><p>
+					The bootstrap dropdown checklist module is from http://acquisio.github.io/bootstrap-dropdown-checkbox/. I extended the functionality to provide callbacks, draw the little speech triangle above the box, and support a mode where only one box is checked at any given time. The plugin is still very limited and doesn't allow for easy customization, but the results were acceptable for this project.
+				</p><p>
+					My first revision of this app used gridly for the card grid. Gridly lets you drag and drop to reorder things, which I think is very cool. The downside is that it makes the app sluggish for large numbers of divs, which made the library a no go.
+				</p><p>
+					I use Local Storage to store all the user preferences. Objects get converted to JSON strings before being stored. (Unfortunetely, you can't use Local Storage for local sites on IE9, but all the other browsers let you do this. So this site can't be used offline with IE.) I occasionally use request parameters to differentiate between pages.
+				</p><p>
+					The most interesting part of this site is opening the packs. I never really gave much thought into how cards in packs (where cards have different rarities) are distributed. I noticed in online TCGs, you can usually buy packs that grant you (slightly) better odds of getting a rare card. The strategy I went with was to randomly choose the (weighted) rarity of the card that will be picked and then (fairly) randomly choose one of the cards in that rarity group. I think the percentages I chose are very generous (though it's still hard to collect all the cards) and the algorithm is very fair, which are both choices that might put a real company out of business. I would bet that real companies would distribute cards less fair-randomly and make sure that opening card packs is as addictive as possible. I think ultra rare cards either have extremely low (.001%) probabilities or require you to complete some ridiculous event. There are five types of rarities in Ayakashi, but unlike most card games, there are far more high rarity cards than low rarity cards. I guess this is another strategy to make customers feel like they're getting rare cards when they're really just getting standard cards.
+				</p><p>
+					The technical part of opening the packs is a loaded dice problem, which is a fun problem with a clear solution (see <a href="http://www.keithschwarz.com/darts-dice-coins/">http://www.keithschwarz.com/darts-dice-coins/</a>). I could have optimized it more, but I didn't feel like reimplementing Vose Alias in javascript.  The initialization step only really needs to be done once.
+				</p><p>
+					Anyway, here are the probabilities I settled on:
+				</p><p>
+					<table class="table semi-borderless">
+						<tr><th>Pack Type</th><th>Card 1</th><th>Card 2</th><th>Card 3</th><th>Card 4</th><th>Card 5</th></tr>
+						<tr><td>Normal Pack Cards:</td><td>Common</td><td>Common</td><td>Normal</td><td>Normal</td><td>Normal</td></tr>
+						<tr><td>Rare Pack Cards:</td><td>Normal</td><td>Normal</td><td>Normal</td><td>Rare</td><td>Rare</td></tr>
+						<tr><td>Legendary Pack Cards:</td><td>Common</td><td>Normal</td><td>Rare</td><td>Rare</td><td>Legenday</td></tr>
+					</table>
+				</p>
+				<p>
+					<table class="table table-bordered">
+					<tr>
+						<th>Card Type</th>
+						<th>Rarity 1</th>
+						<th>Rarity 2</th>
+						<th>Rarity 3</th>
+						<th>Rarity 4</th>
+						<th>Rarity 5</th>
+					</tr><tr>
+						<th>Common Card Probabilities</th>
+						<td>75%</td>
+						<td>25%</td>
+						<td>0%</td>
+						<td>0%</td>
+						<td>0%</td>
+					</tr><tr>
+						<th>Normal Card Probabiltiies</th>
+						<td>15%</td>
+						<td>25%</td>
+						<td>45%</td>
+						<td>10%</td>
+						<td>5%</td>
+					</tr><tr>
+						<th>Rare Card Probabilities</th>
+						<td>0%</td>
+						<td>0%</td>
+						<td>50%</td>
+						<td>30%</td>
+						<td>20%</td>
+					</tr><tr>
+						<th>Legendary Card Probabilities</th>
+						<td>0%</td>
+						<td>0%</td>
+						<td>0%</td>
+						<td>70%</td>
+						<td>30%</td>
+					</tr>
+					</table>
+				</p><p>
+					As this site was mostly made to practice CSS, I've discovered I still dislike it. I understand it more than ever before, my main problem with CSS is not with the styling, but with organizing the styles. Maybe I should seriously look into LESS or SASS and see if either of those languages ease my complaints with organizing my styles.
+				</p>
+			</div>
+		</div>
+		<div class="row-fluid text">
+			<div class="span12 textbox">				
+				<p>
+					<h2>Known Remaining Issues</h2>
+				</p><p><ul>
+					<li>Need to make the modals responsive. Mobile version isn't very nice right now.</li>
+					<li>The infinite scroll doesn't work on mobile and should be enhanced to remove cards to increase performance</li>
+					<li>Better animations when opening up card packs</li>
+					<li>Can't figure out the proper way to toggle between stretch and fit for the background wallpaper. I went with a fake element that I resize</li>
+					<li>Upgrade to Bootstrap 3, this is an easy fix to the modal problem</li>
+					<li>It would be nice to have a filter navbar option</li>
+					<li>It would be nice to have a search navbar option</li>
+					<li>It would be nice to be able to paginate instead of infinite scroll</li>
+					<li>It would be nice to be able to cleanly adjust the views in place (without resorting to the dropdown)</li>
+					<li>It would be nice to make the sorting order (ascending or descending) more user friendly</li>
+					<li>There are a few loose 'styles' and 'onclick' attributes I need to remove from the HTML</li>
+					<li>Handlebars templates should be precompiled or at least only compiled once per page</li>
+					<li>A lot of the Javascript would benefit from proper enums</li>
+					<li>The Javascript mixes way too much view code with logic code</li>
+					<li>And of course, the Javascript could use better organization. Everything is in the global namespace right now</li>
+					<li>Depending on how the Javascript is organized, it might be nice to make a test suite for it</li>
+				</ul></p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Javascript -->
+	<script src="js/ext/jquery-2.1.0.min.js"></script>
+	<script src="js/ext/bootstrap.min.js"></script>
+	<script src="js/bootstrap-dropdown-checkbox.js"></script>
+	<script src="data.js"></script>
+	<script src="js/ayacommon.js"></script>
+	<script src="js/description.js"></script>
+
+</body>
+</html>
