@@ -6,14 +6,14 @@
   "author": "jdiscar <j.discar+github@gmail.com>",	
   "dependencies": {},
   "devDependencies": {
-		"jshint":        "2.3.x",
-		"jscs":          "1.0.x"
-	},
+    "jshint":        "2.3.x",
+    "jscs":          "1.0.x"
+  },
   "scripts": {
     "test": "make test",
     "build": "uglifyjs vose-alias-method.js --mangle -o vose-alias-method-min.js",
     "lint": "jsl -nofilelisting -nologo -conf jsl.conf -process vose-alias-method.js",
-		"pretest": "jshint vose-alias-method.js && jscs vose-alias-method.js"
+    "pretest": "jshint vose-alias-method.js"
   },
   "jshintConfig": {
     "boss":      true,
@@ -25,6 +25,7 @@
     "onecase":   true,
     "lastsemic": true,
     "newcap":    false,
+    "expr":      true,
     "maxlen":    100,
     "indent":    2
   },
