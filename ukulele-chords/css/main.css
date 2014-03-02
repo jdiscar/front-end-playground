@@ -1,0 +1,49 @@
+body {
+	background-color: #61d9fe;
+}
+
+.navbar-inverse .nav > li > a {
+	color: #ffffff;
+}
+
+.transposeLinks > a {
+	color: #ffffff;
+	font-weight: bold;
+}
+
+.white-caret {
+	border-top-color: white !important;
+	border-bottom-color: white !important;
+}
+
+a.anchor{
+	display: block; 
+	position: relative; 
+	top: -60px; 
+	visibility: hidden;
+}
+
+.song-container {
+	position: relative;
+	padding-top: 40px;
+	margin-top: -40px;
+	margin-bottom: 20px;
+}
+.song-container .song-contents {
+	padding: 20px 40px 40px 40px;
+	background-color: #ffffff;
+	border-radius: 10px;
+}
+.song-container .song-hud {
+	position: absolute;
+	right: 0;
+	margin-right: 15px;
+	background-image: url(../img/flag.png);
+	width: 119px;
+	height: 180px;
+}
+.song-container .song-hud .song-hud-contents {
+	margin: 0px auto;
+	width: 90px;
+	color: white;
+}

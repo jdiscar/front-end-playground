@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<meta charset="utf-8">
+	<title>Ukulele Adventure Time</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<!-- Don't include bootstrap-responsive because the lyrics spacing is important -->
+	<!-- <link href="css/bootstrap-responsive.min.css" rel="stylesheet"> -->
+	<link href="css/bootstrap-combobox.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  <script src="js/html5shiv.js"></script>
+	<![endif]-->
+
+	<!-- Fav and touch icons -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+	<link rel="shortcut icon" href="ico/favicon.png">
+
+	<!-- Templates -->
+	<script id="songTemplate" type="text/template">
+	<div id="dsong-{0-id}">
+		<a id="song-{0-id}" class="anchor"></a>	
+		<div class="row">
+			<div class="span12 song-container">
+				<div class="song-hud">
+					<div class="song-hud-contents">
+						<a href="#song-{1-previd}"><i class="icon-chevron-left icon-white" /></a> SONGS <a href="#song-{2-nextid}"><i class="icon-chevron-right icon-white" /></a>
+						<div style="margin-top: 15px" class="transposeLinks">
+							TRANSPOSE:
+							<br><a href="#" onclick="reloadSong({0-id},{3-transpose}+1);return false;">Up</a>
+							<br><a href="#" onclick="reloadSong({0-id},{3-transpose}-1);return false;">Down</a>				
+							<br><a href="#" onclick="reloadSong({0-id},0);return false;">Reset</a>
+						</div>
+					</div>
+				</div>
+				<div class="song-contents">
+					<h1 style="color: #de2726">{4-Title}</h1>
+					<b>Source:</b> {7-Source}
+					<table style="margin-top: 10px; height: 80px;">{6-Audio}</table>
+					{5-Song}
+					<br><b>Links</b>
+					<br><li><a href="singleSong.html?songId={0-id}&transpose={3-transpose}" target="_window">Printable Version of this Song</a></li>
+					{8-Links}
+				</div>
+			</div>
+		</div>
+	</div>
+	</script>
+
+	<script id="audioTemplate" type="text/template">
+		<tr><td><b>{0-title}</b></td><td width="10">&nbsp;</td><td><audio preload="none" controls><source src="{1-title}" type="audio/mpeg">Your browser does not support the audio element.</audio></td></tr>
+	</script>
+
+	<script id="linkTemplate" type="text/template">
+		<li><a href="{1-url}">{0-title}</a></li>
+	</script>
+
+	<script id="songListTemplate" type="text/template">	
+		<li><a href="#song-{0-id}">{1-title}</a></li>
+	</script>
+  </head>
+
+  <body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+	  <div class="navbar-inner">
+		<div class="container">
+		  <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="brand" style="color: #67d244" href="index.html">Ukulele Adventure Time</a>
+		  <div class="nav-collapse collapse">
+			<ul class="nav">
+			  <li><a href="#about">About</a></li>
+			  <li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Songs<b class="caret white-caret"></b></a>
+				<ul id="songlist" class="dropdown-menu"></ul>
+			  </li>
+			  <li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Sort<b class="caret white-caret"></b></a>
+				<ul class="dropdown-menu">
+				  <li><a href="#" onclick="changeSortType('title'); return false;">Sort By Title</a></li>
+				  <li><a href="#" onclick="changeSortType('source'); return false;">Sort By Air Date</a></li>
+				</ul>
+			  </li>
+			  <li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Chords<b class="caret white-caret"></b></a>
+				<ul class="dropdown-menu">
+				  <li class="nav-header">Chord Images</li>
+				  <li><a href="#" onclick="changeLayoutType('off'); return false;">Off</a></li>
+				  <li><a href="#" onclick="changeLayoutType('top'); return false;">Top</a></li>
+				  <li><a href="#" onclick="changeLayoutType('left'); return false;">Left</a></li>
+				  <li><a href="#" onclick="changeLayoutType('right'); return false;">Right</a></li>  
+				  <li class="divider"></li>
+				  <li class="nav-header">Chord Position</li>
+				  <li><a href="#" onclick="changeChordPosition('above'); return false;">Above Lyrics</a></li>  
+				  <li><a href="#" onclick="changeChordPosition('in'); return false;">In Lyrics</a></li>  
+				</ul>
+			  </li>
+			  <li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Instrument<b class="caret white-caret"></b></a>
+				<ul class="dropdown-menu">
+				  <li><a href="#" onClick="return false;">GCEA Tuned Ukulele</a></li>
+				</ul>
+			  </li>
+			</ul>
+			<form class="navbar-form form-search pull-right">
+			  <div class="combobox"><input id="searchBox" type="text" autocomplete="off" placeholder="Search" /><span class="add-on btn dropdown-toggle" data-dropdown="dropdown"><span class="caret"/></span></div>
+			</form>	
+		  </div>
+		</div>
+	  </div>
+	</div>
+
+	<div class="container" style="padding-top: 40px">
+		<center><img src="img/logo.png"></center>
+		<a class="anchor" name="about"></a>
+		<div class="hero-unit">
+			<p><center>
+				<!--
+				<script type="text/javascript">
+				google_ad_client="pub-3672665305352852";
+				google_ad_host="pub-1556223355139109";
+				google_ad_host_channel="00000";
+				google_ad_width=468;
+				google_ad_height=60;
+				google_ad_format="468x60_as";
+				google_ad_type="text_image";
+				google_color_border="FFFFFF";
+				google_color_bg="FFFFFF";
+				google_color_link="3C3C3C";
+				google_color_url="000000";
+				google_color_text="215670";
+				</script>
+				<script type="text/javascript"
+					src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+				</script>
+				-->
+			</center></p>
+			<p>
+				Rebecca Sugar (<a href="http://youtu.be/FPyFfjZdi5o">Wikia</a>, <a href="http://rebeccasugar.tumblr.com/">Tumblr</a>, <a href="http://youtu.be/FPyFfjZdi5o">CC2012 Medley</a>) was an Adventure Time writer, storyboard artist, and composer until leaving to create Steven Universe.  She created several songs for the series, all of which I grew to love, so I compiled them all together on one page.  I also added the opening theme and a fan song I really liked.  Rebecca Sugar composed most of her songs on the ukulele and the chords I've listed mostly come from her tumblr.  Currently only GCEA Tuned Ukulele Chords are listed, but that might change.
+			</p>
+			<p>
+				I've included Lyrics, Chords, Youtube links (which will probably last less than a week, but whatever), and song commentary links.  I'm not very musical, but hopefully I mostly did the music side of this site right.
+			</p>
+			<p>
+				If you want to learn to play the ukulele, Rebecca Sugar's short and sweet Adventure Time songs are a great, fun place to start.  Even a non-serious, complete beginner can strum out the songs.  Just get a ukulele (cheap ones are less than $30), tune it to GCEA (I use the iOS <a href="http://lmgtfy.com/?q=tun-d Free">tun-d Free app</a>, but use any option you like), and then follow the pictures on this page.  You can also watch a few beginner's lessons on youtube, but you should be able to jump into the Adventure Time songs right away.  A "Down Down Up Up Down Up" strum (or even just a "Down" strum) is good enough. If you have trouble with any chords, just find an easier chord that sounds close enough (for example, use Bm instead of a B7).  Have fun with it-
+			</p>
+			<p>
+				Library-wise, this site uses <a href="http://jquery.com/">JQuery</a>, <a href="http://twitter.github.com/bootstrap/">Bootstrap</a>, and <a href="http://lunrjs.com/">lunr.js</a>.  Lunr.js is used for client side search, but it's a little spotty.  This site uses html5 audio to play mp3s, which doesn't work on older versions of Firefox.  I've really only tested this page in Chrome.  Feel free to play with code, all the song info is in the data.js file.  Sorry the code is so bad, but this is just a quick one-off site and I didn't want to spend too much time on it.  Feel free to try to fix it.
+			</p>
+			<p>
+				Contact me at <a href="#"><span id="my-email">please enable javascript to view</span></a> if...
+				<li>You've made code changes</li>
+				<li>You have HD video clips for all the songs</li>
+				<li>You want to host a torrent of this songbook page with mp3s and video clips</li>
+				<li>You can send me chord images for other stringed instruments</li>
+				<li>You have suggestions or other constructive comments</li>
+			</p>
+			<p><center><a href="https://www.dropbox.com/s/tbhisucpri9t3y0/UkuleleAdventureTime20130501.zip" class="btn btn-primary btn-large">Download the Standalone Version with Audio and Video</a></center></p>
+		</div>
+
+		<div id="content">
+			Failed to Load Songs
+		</div>
+		
+	</div>
+	
+	<!-- Javascript -->
+	<script src="js/ext/jquery-1.7.2.min.js"></script>
+	<script src="js/ext/lunr.min.js"></script>
+	<script src="js/ext/bootstrap.min.js"></script>
+	<script src="data.js"></script>
+	<script src="js/bootstrap-combobox-new.js"></script>
+	<script src="js/lyrichords.js"></script>
+	<script src="js/atukecommon.js"></script>
+	<script src="js/index.js"></script>
+  </body>
+</html>
